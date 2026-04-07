@@ -38,10 +38,11 @@ async def endpoint(
 async def endpoint(
     solving: str,
     session: AsyncSessionDep,
-    # current_user: CurrentUserDep,
+    current_user: CurrentUserDep,
     ollama_chat: OllamaChatDep,
     session_game_id: UUID = Path(alias="sessionGameID"),
+
 ):
     return await RoundService.finish_round(
-        solving=solving, session_game_id=session_game_id, ollama_chat=ollama_chat
+        session=session, current_user=current_user, solving=solving, session_game_id=session_game_id, ollama_chat=ollama_chat
     )

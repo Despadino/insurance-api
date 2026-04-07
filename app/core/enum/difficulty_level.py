@@ -27,5 +27,6 @@ async def get_prompt_user(full_name: str, difficulty_level: DifficultyLevelEnum)
     "happiness": <целое число от 0 до 100>,
     "annual_savings": <целое число, рубли — сколько может отложить за год (если уходит в минус — отрицательное число)>,
     "background": "<строка, 4–5 предложения. >"
+    "is_finish": <по умолчанию False. Пока стаит знак лож персонаж живой. Он может стать True только тогда когда умер или дожил до 50 лет.>
 }}
 """
