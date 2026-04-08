@@ -1,7 +1,6 @@
 import uuid
-from typing import Optional
 
-from sqlalchemy import UUID, Boolean, ForeignKey, String, Integer
+from sqlalchemy import UUID, Boolean, ForeignKey, Integer, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.db.postgresql.base import Base
@@ -19,7 +18,7 @@ class SessionGame(Base):
     full_name: Mapped[str] = mapped_column(String)
 
     background: Mapped[str] = mapped_column(String, nullable=True)
-    
+
     age: Mapped[int] = mapped_column(Integer, nullable=True, default=20)
     result: Mapped[str] = mapped_column(String, nullable=True)
 

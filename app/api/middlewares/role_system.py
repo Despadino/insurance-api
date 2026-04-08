@@ -1,9 +1,9 @@
-from app.utils.errors.error import CustomErrorCode, error_service
 from fastapi import Depends
 
 from app.api.middlewares.current_user import get_current_user
 from app.core.enum import UserRoleEnum
 from app.models.user.schemas import UserRead
+from app.utils.errors.error import CustomErrorCode, error_service
 
 
 def roles_required(*required_roles: UserRoleEnum):

@@ -31,22 +31,6 @@ async def endpoint(
     )
 
 
-# @router.patch(
-#     "/{sessionGameID}",
-#     response_model=SessionGameRead,
-#     summary="Завершить игру",
-#     dependencies=[Depends(roles_required())],
-# )
-# async def endpoint(
-#     session: AsyncSessionDep,
-#     current_user: CurrentUserDep,
-#     session_game_id: UUID = Path(alias="sessionGameID"),
-# ):
-#     return await SessionGameService(session).finish(
-#         session_game_id=session_game_id, current_user=current_user
-#     )
-
-
 @router.delete(
     "/{sessionGameID}",
     summary="Удалить игру",

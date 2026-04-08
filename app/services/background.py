@@ -1,15 +1,11 @@
 import json
-from typing import List, Optional
 from uuid import UUID
 
 from app.core.enum.difficulty_level import DifficultyLevelEnum, get_prompt_user
 from app.core.enum.redis_db import RedisDB
-from app.core.logger import logger
 from app.db.postgresql.db import AsyncSession
-from app.db.redis_client import RedisClient, redis_client
-from app.models.session_game.repositories import SessionGameRepository
-from app.models.session_game.schemas import SessionGameCreate, SessionGameRead
-from app.models.user.repositories import UserRepository
+from app.db.redis_client import RedisClient
+from app.models.session_game.schemas import SessionGameRead
 from app.models.user.schemas import UserRead
 from app.services.session_game import SessionGameService
 from app.utils.ai.ollama import OllamaChat

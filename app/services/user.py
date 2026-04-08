@@ -1,5 +1,4 @@
-from typing import List, Optional
-from uuid import UUID
+from typing import List
 
 from app.core.enum import UserRoleEnum
 from app.db.postgresql.db import AsyncSession
@@ -31,19 +30,23 @@ class UserService:
         return await UserRepository(self._session).get_all()
 
     async def update(self, data: UserUpdate, user_id, current_user: UserRead):
-        user: UserRead = await UserRepository(self._session).get_by_id(id=current_user.id)
+        user: UserRead = await UserRepository(self._session).get_by_id(
+            id=current_user.id
+        )
         if user.role is UserRoleEnum.ADMIN or current_user.id == user_id:
             return await UserRepository(self._session).update_one(
                 id=user_id, **data.dict(exclude_unset=True)
             )
-        
+
         raise error_service.error(
             CustomErrorCode.HTTP_403_FORBIDDEN,
             details=["Недостаточно прав"],
         )
 
     async def delete(self, user_id, current_user: UserRead):
-        user: UserRead = await UserRepository(self._session).get_by_id(id=current_user.id)
+        user: UserRead = await UserRepository(self._session).get_by_id(
+            id=current_user.id
+        )
         if user.role is UserRoleEnum.ADMIN or current_user.id == user_id:
             return await UserRepository(self._session).delete_by_id(id=user_id)
 

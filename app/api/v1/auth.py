@@ -1,17 +1,9 @@
 from datetime import datetime, timedelta, timezone
 
-from fastapi import APIRouter, Depends, HTTPException, Request, Response
-from fastapi.security import HTTPBearer
+from fastapi import APIRouter, Depends, Response
 
-from app.api.middlewares.current_user import (
-    CurrentUserDep,
-    refresh_acess_token,
-    validate_current_user,
-)
-from app.api.middlewares.role_system import roles_required
+from app.api.middlewares.current_user import refresh_acess_token, validate_current_user
 from app.api.middlewares.token import create_token, encode_jwt
-from app.core.enum import UserRoleEnum
-from app.core.logger import logger
 from app.db.postgresql.db import AsyncSessionDep
 from app.models.schemas.token import Token
 from app.models.user.schemas import UserCreate, UserRead

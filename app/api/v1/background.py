@@ -1,8 +1,7 @@
-from typing import List, Literal
+from typing import Literal
 from uuid import UUID
 
 from fastapi import APIRouter, Depends, Path
-from fastapi import Depends
 
 from app.api.middlewares.current_user import CurrentUserDep
 from app.api.middlewares.role_system import roles_required
@@ -10,6 +9,7 @@ from app.core.enum import DifficultyLevelEnum
 from app.db.postgresql.db import AsyncSessionDep
 from app.services.background import BackgroundService
 from app.utils.ai.ollama import OllamaChatDep
+from app.models.schemas.game.background import Background
 router = APIRouter(
     prefix="/background",
     tags=["Предыстории игрока"],
@@ -18,7 +18,7 @@ router = APIRouter(
 
 @router.get(
     "/{difficultyLevel}/{sessionGameID}",
-    # response_model=str,
+    response_model=Background,
     summary="Получить предысторию нового персонажа",
     dependencies=[Depends(roles_required())],
 )

@@ -1,16 +1,13 @@
-import uuid
-from abc import ABC, abstractmethod
+from abc import ABC
 from functools import wraps
-from typing import Any, List, Optional
+from typing import Any, List
 
-from app.utils.errors.error import CustomErrorCode, error_service
-from fastapi import HTTPException, status
-from sqlalchemy import delete, func, insert, inspect, select, update
+from sqlalchemy import delete, insert, inspect, select, update
 from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 from sqlalchemy.orm import Session
-from sqlalchemy.sql import type_coerce
 
 from app.core.logger import logger
+from app.utils.errors.error import CustomErrorCode, error_service
 
 
 def handle_repository_errors(func):

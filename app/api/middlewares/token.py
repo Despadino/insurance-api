@@ -2,10 +2,9 @@ from datetime import datetime, timedelta
 
 import bcrypt
 import jwt
-from app.utils.errors.error import CustomErrorCode, error_service
-from fastapi import HTTPException
 
 from app.core.settings import settings
+from app.utils.errors.error import CustomErrorCode, error_service
 
 
 # token

@@ -1,15 +1,14 @@
 from datetime import datetime
 
+import sqlalchemy as sa
 from sqlalchemy import DateTime, func
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
-
-from app.db.postgresql.metadata import meta
 
 
 class SqlalchemyBase(DeclarativeBase):
     """Base for all models."""
 
-    metadata = meta
+    metadata = sa.MetaData()
 
 
 class Base(SqlalchemyBase):

@@ -1,16 +1,20 @@
-from app.utils.errors.error import CustomErrorCode, error_service
 from fastapi import Depends, Form, Request
 from fastapi.security import HTTPAuthorizationCredentials, OAuth2PasswordBearer
 from typing_extensions import Annotated
 
-from app.api.middlewares.token import (create_token, decode_jwt, encode_jwt,
-                                       validate_password)
+from app.api.middlewares.token import (
+    create_token,
+    decode_jwt,
+    encode_jwt,
+    validate_password,
+)
 from app.core.settings import settings
 from app.db.postgresql.db import get_session
 from app.models.schemas.token import Token
 from app.models.user.repositories import UserRepository
 from app.models.user.schemas import UserRead
 from app.services.user import UserService
+from app.utils.errors.error import CustomErrorCode, error_service
 
 
 async def get_current_user(

@@ -48,7 +48,9 @@ async def endpoint(
     current_user: CurrentUserDep,
     user_id: UUID = Path(alias="userId"),
 ):
-    return await UserService(session).update(user_id=user_id, data=data, current_user=current_user)
+    return await UserService(session).update(
+        user_id=user_id, data=data, current_user=current_user
+    )
 
 
 @router.delete(

@@ -1,19 +1,19 @@
 services:
 
-  api:
-    container_name: ${PROJECT_TITLE}_api
-    build:
-      context: .
-      dockerfile: ./docker/Dockerfile
-    restart: always
-    command: poetry run python -m main
-    environment:
-      POSTGRES_HOST: postgres
-      POSTGRES_PORT: 5432
-    env_file:
-      - .env
-    ports:
-      - ${FAST_API_PORT}:${FAST_API_PORT}
+  # api:
+  #   container_name: ${PROJECT_TITLE}_api
+  #   build:
+  #     context: .
+  #     dockerfile: ./docker/Dockerfile
+  #   restart: always
+  #   command: poetry run python -m main
+  #   environment:
+  #     POSTGRES_HOST: postgres
+  #     POSTGRES_PORT: 5432
+  #   env_file:
+  #     - .env
+  #   ports:
+  #     - ${FAST_API_PORT}:${FAST_API_PORT}
 
   postgres:
     image: postgres:latest
