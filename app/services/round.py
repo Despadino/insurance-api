@@ -43,35 +43,22 @@ class RoundService:
                 details=["Недостаточно прав"],
             )
 
-        while True:
-            try:
-                event = await get_random_incident()
-                image_rel = event.get("image", "") 
 
-                data = await RedisClient(RedisDB.ROUND).get_value(key=session_game_id)
-                data["event"] = event
 
-                await RedisClient(RedisDB.ROUND).set_value(
-                    key=session_game_id,
-                    value=data,
-                )
+        event = await get_random_incident()
 
-                if image_rel:
-                    image_path = Path(f"img/{image_rel}")
-                    image_bytes = image_path.read_bytes() if image_path.exists() else b""
-                else:
-                    image_bytes = b""
+        data = await RedisClient(RedisDB.ROUND).get_value(key=session_game_id)
+        data["event"] = event
 
-                event["image"] = image_bytes 
+        await RedisClient(RedisDB.ROUND).set_value(
+            key=session_game_id,
+            value=data,
+        )
 
-            except:
-                logger.info(f"image_rel {image_rel}")
-                continue
-            
-            return {
-                "status": data["status"],
-                "event": event,
-            }
+        return {
+            "status": data["status"],
+            "event": event,
+        }
 
     async def finish_round(
         self,

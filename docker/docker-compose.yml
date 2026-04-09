@@ -1,19 +1,26 @@
 services:
-
-  # api:
-  #   container_name: ${PROJECT_TITLE}_api
-  #   build:
-  #     context: .
-  #     dockerfile: ./docker/Dockerfile
-  #   restart: always
-  #   command: poetry run python -m main
-  #   environment:
-  #     POSTGRES_HOST: postgres
-  #     POSTGRES_PORT: 5432
-  #   env_file:
-  #     - .env
-  #   ports:
-  #     - ${FAST_API_PORT}:${FAST_API_PORT}
+  api:
+    container_name: ${PROJECT_TITLE}_api
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
+    restart: always
+    command: poetry run python -m main
+    env_file:
+      - .env
+    environment:
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+      REDIS_HOST: redis
+      REDIS_PORT: 6379  
+      OLLAMA_HOST: http://host.docker.internal:11434
+    ports:
+      - ${FAST_API_PORT}:${FAST_API_PORT}
+    depends_on:
+      - postgres
+      - redis
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
 
   postgres:
     image: postgres:latest

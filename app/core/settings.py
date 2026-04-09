@@ -44,8 +44,10 @@ class Settings(BaseSettings):
     REDIS_PORT: int
     REDIS_PASSWORD: str
 
-    OLLAMA_MODEL: str ="gpt-oss:120b-cloud"
+    OLLAMA_MODEL: str
+    OLLAMA_HOST: str
 
+    
     @property
     def db_url(self) -> URL:
         """
